@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "my-hand-replayer",
-    "slug": "my-hand-replayer",
+    "name": "facecam-over-web-browser",
+    "slug": "facecam-over-web-browser",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "landscape",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -11,11 +11,25 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
+    "assetBundlePatterns": ["**/*"],
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "LANDSCAPE"
+        }
+      ]
     ],
     "ios": {
-      "supportsTablet": true
+      "requireFullScreen": true
     },
     "android": {
       "adaptiveIcon": {

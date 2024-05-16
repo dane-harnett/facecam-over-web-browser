@@ -1,5 +1,5 @@
 {
-  "name": "my-hand-replayer",
+  "name": "facecam-over-web-browser",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -9,10 +9,15 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~50.0.14",
-    "expo-status-bar": "~1.11.1",
+    "expo": "^51.0.4",
+    "expo-camera": "~15.0.7",
+    "expo-screen-orientation": "~7.0.4",
+    "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-native": "0.74.1",
+    "react-native-webview": "13.8.6",
+    "typescript": "~5.3.3",
+    "@types/react": "~18.2.79"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
