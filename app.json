@@ -31,7 +31,8 @@
       ]
     ],
     "ios": {
-      "requireFullScreen": true
+      "requireFullScreen": true,
+      "bundleIdentifier": "com.daneharnett.facecamoverwebbrowser"
     },
     "android": {
       "adaptiveIcon": {
