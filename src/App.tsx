@@ -13,6 +13,11 @@ import {
 } from "react-native";
 
 import { DraggableCamera } from "./DraggableCamera";
+import { FullHeightCamera } from "./FullHeightCamera";
+
+const config = {
+  cameraStyle: "FullHeight",
+};
 
 export function App() {
   const [submittedUrl, setSubmittedUrl] = useState("https://google.com");
@@ -51,65 +56,64 @@ export function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.webViewContainer}>
-        <WebView source={{ uri: submittedUrl }} />
-      </View>
-
+    <View style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.leftContainer}
       >
-        <View
-          style={[
-            styles.controlContainer,
-            isEditingUrl ? undefined : styles.controlContainerUnfocused,
-          ]}
-        >
-          <TextInput
-            clearButtonMode="always"
-            inputMode="url"
-            onBlur={onUrlInputBlur}
-            onChangeText={textChangeHandler}
-            onFocus={onUrlInputFocus}
-            onSubmitEditing={onSubmit}
-            returnKeyType="go"
-            style={styles.urlTextInput}
-            value={currentUrl}
-          />
+        <View style={styles.webViewContainer}>
+          <WebView source={{ uri: submittedUrl }} />
         </View>
       </KeyboardAvoidingView>
 
-      <View style={styles.dragAndDropCamContainer}>
-        <DraggableCamera />
+      <View style={styles.rightContainer}>
+        {config.cameraStyle === "FullHeight" ? (
+          <FullHeightCamera />
+        ) : (
+          <DraggableCamera />
+        )}
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <View
+            style={[
+              styles.controlContainer,
+              isEditingUrl ? undefined : styles.controlContainerUnfocused,
+            ]}
+          >
+            <TextInput
+              clearButtonMode="always"
+              inputMode="url"
+              onBlur={onUrlInputBlur}
+              onChangeText={textChangeHandler}
+              onFocus={onUrlInputFocus}
+              onSubmitEditing={onSubmit}
+              returnKeyType="go"
+              style={styles.urlTextInput}
+              value={currentUrl}
+            />
+          </View>
+        </KeyboardAvoidingView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignContent: "stretch",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    height: "100%",
-    flex: 1,
+    flexDirection: "row",
   },
-  dragAndDropCamContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: 10,
+  leftContainer: {
+    width: "70%",
+  },
+  rightContainer: {
+    width: "30%",
   },
   controlContainer: {
     backgroundColor: "#777",
-    bottom: 0,
-    padding: 8,
     width: "100%",
-    zIndex: 3,
   },
-  controlContainerUnfocused: {
-    position: "absolute",
-  },
+  controlContainerUnfocused: {},
   urlTextInput: {
     borderRadius: 6,
     backgroundColor: "#aaa",
@@ -119,6 +123,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   webViewContainer: {
-    flexGrow: 1,
+    height: "100%",
   },
 });
